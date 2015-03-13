@@ -123,10 +123,10 @@ Back on the raspberry pi
 The ~/kernel directory on the Raspberry Pi should now look like this
 ::
 	pi@mypi ~/kernel $ ls -l 
-	 -rw-r--r--  1 malcolm malcolm   105770 Mar 12 19:33 .config
-	 -rw-r--r--  1 malcolm malcolm   258497 Mar 13 09:43 firmware.tar.gz
-	 -rw-r--r--  1 malcolm malcolm  3996592 Mar 13 10:08 kernel.img
-	 -rw-r--r--  1 malcolm malcolm 14180461 Mar 13 09:43 modules.tar.gz
+	 -rw-r--r--  1 pi pi   105770 Mar 12 19:33 .config
+	 -rw-r--r--  1 pi pi   258497 Mar 13 09:43 firmware.tar.gz
+	 -rw-r--r--  1 pi pi  3996592 Mar 13 10:08 kernel.img
+	 -rw-r--r--  1 pi pi 14180461 Mar 13 09:43 modules.tar.gz
  
 Save the existing kernel and copy the new kernel to the boot directory
 	cd /boot
