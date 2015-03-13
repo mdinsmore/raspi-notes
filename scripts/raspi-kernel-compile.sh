@@ -36,7 +36,7 @@ then
 	mkdir -p $RASPI_MOUNT
 fi
 
-MOUNT_EXISTS=`df -h  grep $RASPI_MOUNT_DIRECTORY`
+MOUNT_EXISTS=`df -h | grep $RASPI_MOUNT_DIRECTORY`
 
 if [ "$MOUNT_EXISTS" = "" ]
 then
@@ -66,7 +66,19 @@ fi
 
 # comile the kernel
 cd $KERNEL_SRC
-# make mrproper
+
+ok=x
+
+while [ "$ok" != "n" -a "$ok" != "N" -a "$ok" != "y" -a "$ok" != "Y" ]
+do
+	echo -e "Would you like to compile from scratch (y/n) \c"
+	read ok
+done
+
+if [ "$ok" = "y" -o "$ok" = "Y" ]
+then
+	make mrproper
+fi
 
 cp $RASPI_MOUNT/.config .
 
@@ -78,13 +90,13 @@ echo "(e.g. vim $KERNEL_SRC/.config) or using the menu using the following comma
 echo "	cd $KERNEL_SRC"
 echo "	ARCH=arm CROSS_COMPILE=${CCPREFIX} make menuconfig"
 echo "***************************************************************************************"
-echo "When you are read to continue"
+echo -e "When you are ready to continue \c"
 
 ok=x
 
 while [ "$ok" != 'c' ]
 do
-	echo "Type c<ENTER> to continue or q<ENTER> to quit"
+	echo -e "type c<ENTER> to continue or q<ENTER> to quit (c/q) \c"
 	read ok
 	
 	if [ "$ok" = 'q' ]
@@ -114,8 +126,8 @@ rm kernel.img
 # Package up the modules into an archive 
 echo "Packaging modules and firmware..."
 cd $MODULES_TEMP/lib
-tar -cvzf $RASPI_MOUNT/modules.tar.gz modules 
-tar -cvzf $RASPI_MOUNT/firmware.tar.gz firmware 
+tar -cvf $RASPI_MOUNT/modules.tar.gz modules 
+tar -cvf $RASPI_MOUNT/firmware.tar.gz firmware 
 
 echo "***************************************************************************************"
 echo "If no errors were reported $RASPI_MOUNT_DIRECTORY will now contains the compiled kernel" 

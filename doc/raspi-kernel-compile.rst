@@ -135,15 +135,17 @@ The ~/kernel directory on the Raspberry Pi should now look like this
 	 -rw-r--r--  1 pi pi 14180461 Mar 13 09:43 modules.tar.gz
  
 Save the existing kernel and copy the new kernel to the boot directory
+::
 	cd /boot
-	cp kernel.img kernel-old.img
-	cp ~/kernel/kernel.img .
+	sudo cp kernel.img kernel-old.img
+	sudo cp ~/kernel/kernel.img .
 	
 Save the existing modules and firmware and copy the new modules and firmware to their respective directories under /lib
+::
 	cd /lib
-	tar -cvzf ~/kernel/prev-modules.tar.gz modules
-	tar -cvzf ~/kernel/prev-firmware.tar.gz firmware
-	tar -xvzf ~/kernel/modules.tar.gz
-	tar -xvzf ~/kernel/firmware.tar.gz
+	sudo tar -cvzf ~/kernel/prev-modules.tar.gz modules
+	sudo tar -cvzf ~/kernel/prev-firmware.tar.gz firmware
+	sudo tar -xvzf ~/kernel/modules.tar.gz
+	sudo tar -xvzf ~/kernel/firmware.tar.gz
 	
 .. _script: https://raw.githubusercontent.com/mdinsmore/raspi-notes/master/scripts/raspi-kernel-compile.sh
