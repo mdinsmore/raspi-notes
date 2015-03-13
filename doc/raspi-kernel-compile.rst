@@ -5,6 +5,7 @@ Some instructions on how to cross compile a kernel for the raspberry pi on a ubu
 
 Assumes you have the pi running and available on the network
 
+Here's a link to a script_ that does the ubuntu part of this process
 
 On Raspberry Pi
 ---------------
@@ -145,4 +146,4 @@ Save the existing modules and firmware and copy the new modules and firmware to 
 	tar -xvzf ~/kernel/modules.tar.gz
 	tar -xvzf ~/kernel/firmware.tar.gz
 	
-
+.. _script: https://raw.githubusercontent.com/mdinsmore/raspi-notes/master/scripts/raspi-kernel-compile.sh
