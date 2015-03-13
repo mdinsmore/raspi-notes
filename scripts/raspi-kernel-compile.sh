@@ -1,19 +1,19 @@
 #! /bin/bash
 # a script to cross compile a raspberry pi kernel on ubuntu, debian or deritive 
 # Assumptions:
-# * You have a raspberry pi running which is available on your network called "pi-2b"
+# * You have a raspberry pi running which is available on your network called "pix"
 #   if not change the RASPI_MOUNT_DIRECTORY
 # * You access the raspberry pi using the same user name as your cross-compile box
 #   if not include the username in the host name e.g. if you are
 #   accessing the raspberry pi using the username "pi" you would set 
-#   export RASPI_MOUNT_DIRECTORY=pi@pi-2b:kernel
+#   export RASPI_MOUNT_DIRECTORY=pi@pix:kernel
 
 #  Install prequisite packages
 echo "Ensuring prequisite packages are installed..."
 sudo apt-get install gcc-arm-linux-gnueabi make git-core ncurses-dev sshfs
 
 # configure some environment variables
-export RASPI_MOUNT_DIRECTORY=pi-2b:kernel
+export RASPI_MOUNT_DIRECTORY=pix:kernel
 export RASPI_HOME=$HOME/raspi
 export RASPI_MOUNT=$RASPI_HOME/rpi
 export RASPI_TOOLS=$RASPI_HOME/tools
@@ -84,26 +84,7 @@ cp $RASPI_MOUNT/.config .
 
 make ARCH=arm CROSS_COMPILE=${CCPREFIX} oldconfig
 
-echo "***************************************************************************************"
-echo "Modify the kernel either by edting the .config file"
-echo "(e.g. vim $KERNEL_SRC/.config) or using the menu using the following commands"
-echo "	cd $KERNEL_SRC"
-echo "	ARCH=arm CROSS_COMPILE=${CCPREFIX} make menuconfig"
-echo "***************************************************************************************"
-echo -e "When you are ready to continue \c"
-
-ok=x
-
-while [ "$ok" != 'c' ]
-do
-	echo -e "type c<ENTER> to continue or q<ENTER> to quit (c/q) \c"
-	read ok
-	
-	if [ "$ok" = 'q' ]
-	then
-		exit
-	fi
-done
+ARCH=arm CROSS_COMPILE=${CCPREFIX} make menuconfig
 
 # Build the new kernel 
 echo "Building the kernel..."
