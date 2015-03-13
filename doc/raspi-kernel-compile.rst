@@ -1,6 +1,11 @@
 Steps to cross compile a kernel for the raspberry pi
 ====================================================
 
+Some instructions on how to cross compile a kernel for the raspberry pi on a ubuntu box
+
+Assumes you have the pi running and available on the network
+
+
 On Raspberry Pi
 ---------------
 
